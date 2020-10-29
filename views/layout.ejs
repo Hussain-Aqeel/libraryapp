@@ -3,50 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@200&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
   <title>Luxury Cars - Node.js</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <a class="navbar-brand" href="../">Luxury Cars</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="../">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/cars">Cars</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/contact">Contact</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav d-flex justify-content-end">
-          <li class="nav-item nav-link">
-            <a class="btn rounded btn-info mr-2" href="/users/register">Register</a>
-          </li>
-          <li class="nav-item nav-link">
-            <a class="btn rounded btn-info" href="/users/login">Login</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
-  <div class="container mb-5">
-    <%- body %>
-  </div>
-
+  <%- include('./partials/navbar') %>
+  <%- body %>
 
 
 <!-- Footer -->

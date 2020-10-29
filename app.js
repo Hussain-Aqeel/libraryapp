@@ -24,7 +24,12 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
-
+// This line of code is to exclude the pages that we don't wanna wrap in the container or the deafult layout
+app.set('layout homepage', false);
+app.set('layout cars', false);
+app.set('layout dashboard', false);
+app.set('layout contact', false);
+app.set('layout about', false);
 // Bodyparser
 app.use(express.urlencoded(
   { extended: false }
@@ -49,9 +54,10 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
+  // res.locals.name = req.flash('name');
+  res.locals.name = req.body.name;
   next();
-
-})
+});
 
 // Routes
 app.use('/', require('./routes/index'));

@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const nodemailer = require('nodemailer');
+const { ensureAuthenticated } = require('../config/auth');
 
 // User model
 const User = require('../models/User');
@@ -10,14 +11,55 @@ const User = require('../models/User');
 // Login Page
 router.get('/login', (req, res) => res.render('login'));
 
+// dashboard page
+router.get('/dashboard', ensureAuthenticated, (req, res) => 
+{ 
+  res.locals.name = req.user.name;
+  res.render('dashboard', { name: res.locals.name });
+  console.log(req.user.name); 
+  console.log(res.locals.name); 
+  console.log(typeof req.user.name); 
+  console.log(typeof res.locals.name); 
+
+});
+
+// homepage Page
+router.get('/homepage', (req, res) => {
+  // res.locals.name = req.user.name;
+  // res.render('homepage', { name: res.locals.name });
+  res.render('homepage');
+});
+
 // Register Page
 router.get('/register', (req, res) => res.render('register'));
 
-// Register Page
-router.get('/contact', (req, res) => res.render('contact'));
+// About Page
+router.get('/about', (req, res) => {
+  // res.locals.name = req.user.name;
+  // console.log(req.user);
+  res.render('about');
+  // if(typeof req.user.name == 'undefined') { 
+  //   res.render('about');
+  // } 
+  // else if(typeof req.user.name != 'undefined') {
+  //   // res.locals.name = req.user.name;
+  //   res.render('about', { name: req.user.name });
+  // }
+});
 
-// Register Page
-router.get('/cars', (req, res) => res.render('cars'));
+// Contact Page
+router.get('/contact', (req, res) => {
+    // res.locals.name = req.user.name;
+    // res.render('contact', { name: res.locals.name });
+    res.render('contact');
+});
+
+// Cars Page
+router.get('/cars', (req, res) => {
+  // res.locals.name = req.user.name;
+  // res.render('cars', { name: res.locals.name })
+  res.render('cars');
+});
 
 // Register Handle
 router.post('/register', (req, res) => {
@@ -93,9 +135,9 @@ router.post('/register', (req, res) => {
 // Login handle
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/dashboard',
+    successRedirect: '/users/dashboard',
     failureRedirect: '/users/login',
-    failureFlash: true
+    failureFlash: true,
   })(req, res, next);
 });
 

@@ -1,0 +1,67 @@
+<style>
+  #about-container {
+    height: 80vh;
+    margin-top: 0;
+    padding-top: 0;
+    background: #f4f4f4;
+  }
+  .container h1 {
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
+    padding-top: 2rem;
+  }
+
+  .content {
+    display: grid;
+    grid-template-areas: 
+    'image text-content'
+    ;
+    grid-gap: 2.5rem;
+    margin-top: 3rem;
+    height: 100%;
+    width: 100%;
+  }
+
+  .content img {
+    height: 340px;
+    width: 460px;
+    padding-left: 20px;
+  }
+
+  @media(max-width: 987px) {
+    #about-container {
+      height: 120vh;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-content: space-between;
+    ;
+    }
+
+    .content img {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+</style>
+<!--start here-->
+  <div id="about-container" class="container">
+    <h1 class="text-center">About Us</h1>
+    <div class="content">
+      <img class="image center" src="../img/drew-beamer-Se7vVKzYxTI-unsplash (1).jpg" alt="about">
+      <div class="text-content">
+        <h4>something</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi labore, sed dolor maiores, dolore sit quidem illo saepe aliquam esse quisquam excepturi. Ex harum, pariatur illum aperiam fugit odit dignissimos repellat fuga accusamus at error!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const parentLi = document.getElementById('aboutLi');
+    parentLi.classList.add('active');
+    const about = document.getElementById('about');
+    about.appendChild(`<span class="sr-only">(current)</span>`);
+  </script>
