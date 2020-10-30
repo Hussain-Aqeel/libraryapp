@@ -11,10 +11,18 @@ const User = require('../models/User');
 // Login Page
 router.get('/login', (req, res) => res.render('login'));
 
+// Login Page
+router.get('/account-info', (req, res) => { 
+  res.locals.name = req.user.name;
+  res.locals.email = req.user.email;
+  res.render('account-info', { name: res.locals.name,
+  email: res.locals.email })});
+
 // dashboard page
 router.get('/dashboard', ensureAuthenticated, (req, res) => 
 { 
   res.locals.name = req.user.name;
+  res.locals.email = req.user.email;
   res.render('dashboard', { name: res.locals.name });
   console.log(req.user.name); 
   console.log(res.locals.name); 

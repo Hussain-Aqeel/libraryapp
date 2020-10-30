@@ -56,6 +56,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   // res.locals.name = req.flash('name');
   res.locals.name = req.body.name;
+  res.locals.email = req.body.email;
   next();
 });
 
