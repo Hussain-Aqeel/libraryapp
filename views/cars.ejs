@@ -1,6 +1,15 @@
+<title>Luxury Cars - Available Cars</title>
 
 <!--start here-->
   <div class="container mb-5">
+    <form class="mt-3">
+      <div class="form-group row">
+        <label for="search" class="col-sm-2 col-form-label">Search</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="search" placeholder="Search for a car">
+        </div>
+      </div>
+    </form>
     <div class="row my-4 mx-auto d-flex justify-content-center">
       <!-- first card-->
       <div class="card mb-3 col-md-4">
@@ -16,7 +25,7 @@
           <li class="list-group-item">Interior: Light Brown</li>
         </ul>
         <div class="card-body">
-          <a href="#" class="btn btn-info btn-block rounded card-link">Rent Now</a>
+          <button href="#" type="button" class="btn btn-block btn-info rounded card-link" data-toggle="modal" data-target="#modalAbandonedCart">Rent Now</button>
         </div>
         <div class="card-footer text-muted">
           2 days ago
@@ -37,8 +46,7 @@
           <li class="list-group-item">Interior: Black</li>
         </ul>
         <div class="card-body">
-          <a href="#" class="btn btn-info btn-block rounded card-link">Rent Now</a>
-    
+          <button href="#" type="button" class="btn btn-block btn-info rounded card-link" data-toggle="modal" data-target="#modalAbandonedCart">Rent Now</button>
         </div>
         <div class="card-footer text-muted">
           2 days ago
@@ -57,14 +65,14 @@
           <li class="list-group-item">Year: 2019</li>
           <li class="list-group-item">Milage: 5501</li>
           <li class="list-group-item">Interior: Red</li>
-          <li class="list-group-item d-flex align-items-center">Available Colors: 
+          <!--<li class="list-group-item d-flex align-items-center">Available Colors: 
             <a class="ml-3" href="#"><span class="black"></span></a>
             <a href="#"><span class="red"></span></a>
             <a href="#"><span class="blue"></span></a>
-          </li>
+          </li>-->
         </ul>
         <div class="card-body">
-          <a href="#" class="btn btn-block btn-info rounded card-link">Rent Now</a>
+          <button href="#" type="button" class="btn btn-block btn-info rounded card-link" data-toggle="modal" data-target="#modalAbandonedCart">Rent Now</button>
         </div>
         <div class="card-footer text-muted">
           2 days ago
@@ -85,7 +93,7 @@
           <li class="list-group-item">Interior: Red</li>
         </ul>
         <div class="card-body">
-          <a href="#" class="btn btn-block btn-info rounded card-link">Rent Now</a>
+          <button href="#" type="button" class="btn btn-block btn-info rounded card-link" data-toggle="modal" data-target="#modalAbandonedCart">Rent Now</button>
         </div>
         <div class="card-footer text-muted">
           2 days ago
@@ -93,6 +101,103 @@
       </div>
     </div>
   </div>
+
+
+<!-- Modal: modalAbandonedCart-->
+<div class="modal fade right" id="modalAbandonedCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading">Reserving a Car
+        </p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-12">
+            <p></p>
+            <p class="text-center"><i class="fa fa-car fa-4x"></i></p>
+          </div>
+
+          <div class="col-12">
+            <form class="needs-validation" novalidate>
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom01">First name</label>
+                  <input type="text" class="form-control" id="validationCustom01" placeholder="First name" required>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom02">Last name</label>
+                  <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" required>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom03">City</label>
+                  <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
+                  <div class="invalid-feedback">
+                    Please provide a valid city.
+                  </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom05">Zip</label>
+                  <input type="number" class="form-control" id="validationCustom05" placeholder="Zip" required>
+                  <div class="invalid-feedback">
+                    Please provide a valid zip.
+                  </div>
+                </div>
+              </div>
+              <div> 
+                <label><span class="label-text">Starting date</span> </label> 
+                <input type="date" name="starting-date" class="form-control starting-class" placeholder="MM / YY"> 
+              </div>
+
+              <div> 
+                <label><span class="label-text">Ending date</span> </label> 
+                <input type="date" name="ending-date" class="form-control ending-class" placeholder="MM / YY"> 
+              </div>
+
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                  <label class="form-check-label" for="invalidCheck">
+                    Agree to terms and conditions
+                  </label>
+                  <div class="invalid-feedback">
+                    You must agree before submitting.
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-block" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-outline-info waves-effect rounded" data-dismiss="modal">Cancel</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
 
   <script>
     const parentLi = document.getElementById('carsLi');

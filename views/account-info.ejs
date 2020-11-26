@@ -1,10 +1,87 @@
+<style>
+  .input-group-text {
+    padding: 0.5rem 0.5rem 0.2rem 0.7rem;
+  }
+  
+</style>
+
 <div class="container mt-4">
   <h1>Account information</h1>
   <hr>
-
-  <h5>Name: <%= name %> <span class="fa fa-edit"></span></h5>
-  <br>
-  <h5>Email: <%= email%> <span class="fa fa-edit"></span></h5>
-  <br>
-  <h5>Password: ********** <span class="fa fa-edit"></span></h5>
+<div class="col-12 col-lg-6">
+    <form class="form-group">
+      <label for="name">Name:</label>
+      <div id="nameArea" class="input-group">
+        <input id="name" name="name" type="text" class="form-control" value="<%= name %>" disabled>
+        <div id="edit-name" class="input-group-append">
+          <span class="input-group-text">
+            <a href="#" onclick="editName()"><i id="name-icon" class="fa fa-edit fa-2x"></i></a>
+          </span>
+        </div>
+      </div>
+      <br>
+      <label for="email">Email:</label>
+      <div id="emailArea" class="input-group">
+        <input id="email" name="email" type="text" class="form-control" value="<%= email %>" disabled>
+        <div id="edit-email" class="input-group-append">
+          <span class="input-group-text">
+            <a href="#" onclick="editEmail()"><i id="email-icon" class="fa fa-edit fa-2x"></i></a>
+          </span>
+        </div>
+      </div>
+      <br>
+      <label for="password">Password:</label>
+      <div id="passwordArea" class="input-group">
+        <input id="password" name="password" type="text" class="form-control" value="******" disabled>
+        <div id="edit-password" class="input-group-append">
+          <span class="input-group-text">
+            <a href="#" onclick="editPassword()"><i id="password-icon" class="fa fa-edit fa-2x"></i></a>
+          </span>
+        </div>
+      </div>
+  </form>
 </div>
+</div>
+
+<script>
+  editName = async () => {
+    const btn = document.createElement("button");
+    btn.type = 'submit';
+    btn.classList = 'btn btn-info rounded ml-3';
+    btn.innerText = 'Edit';
+    document.getElementById('nameArea').appendChild(btn);
+    document.getElementById('name').disabled = false;
+
+    document.getElementById('edit-name').style.display = 'none';
+
+    console.log('done');
+
+  }
+
+  editEmail = () => {
+    const btn = document.createElement("button");
+    btn.type = 'submit';
+    btn.classList = 'btn btn-info rounded ml-3';
+    btn.innerText = 'Edit';
+    document.getElementById('emailArea').appendChild(btn);
+    document.getElementById('email').disabled = false;
+
+    document.getElementById('edit-email').style.display = 'none';
+
+
+  }
+
+  // needs some modifications
+  editPassword = () => {
+    const btn = document.createElement("button");
+    btn.type = 'submit';
+    btn.classList = 'btn btn-info rounded ml-3';
+    btn.innerText = 'Edit';
+    document.getElementById('passwordArea').appendChild(btn);
+    document.getElementById('password').disabled = false;
+
+    document.getElementById('edit-password').style.display = 'none';
+
+  }
+
+</script>

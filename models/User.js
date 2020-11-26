@@ -13,6 +13,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  cars: {
+    type: String,
+    required: false
+  },
+  status: {
+    type: String,
+    required: false
+  },
   date: {
     type: Date,
     default: Date.now

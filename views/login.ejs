@@ -1,34 +1,120 @@
-<div class="row mt-5">
+<title>Luxury Cars - Login</title>
+
+<!-- CARD WITH NAV -->
+<div class="mt-5">
   <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mb-3"><i class="fa fa-sign-in"></i>  Login</h1>
-      <%- include('./partials/messages') %>
-      <form action="/users/login" method="POST">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            placeholder="Enter Email"
-          />
+      <div class="card text">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" id="users-list" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link font-weight-bold active" href="#user" role="tab" aria-controls="user" aria-selected="true">User</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link font-weight-bold"  href="#employee" role="tab" aria-controls="employee" aria-selected="false">Employee</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link font-weight-bold" href="#manager" role="tab" aria-controls="manager" aria-selected="false">Manager</a>
+            </li>
+          </ul>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Enter Password"
-          />
+        <div class="card-body">
+          <h1 class="text-center mb-3"><i class="fa fa-sign-in"></i>  Login</h1>          
+          
+
+           <div class="tab-content mt-3">
+           <div class="tab-pane active" id="user" role="tabpanel">
+            <%- include('./partials/messages') %>
+            <form action="/users/login" method="POST">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Enter Email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Enter Password"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <p class="lead mt-4">
+              No Account? <a href="/users/register">Register</a>
+            </p>
+            </div>
+             
+            <div class="tab-pane" id="employee" role="tabpanel" aria-labelledby="history-tab"> 
+              <form>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter Email"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="id">ID</label>
+                  <input
+                    type="id"
+                    id="id"
+                    name="id"
+                    class="form-control"
+                    placeholder="Enter id"
+                  />
+                  <small class="form-text text-muted">Enter the ID that has been created by your manager</small>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+              </form> 
+              
+            </div>
+             
+            <div class="tab-pane" id="manager" role="tabpanel" aria-labelledby="manager-tab">
+              <form>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter Email"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter Password"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+              </form>
+              <p class="lead mt-4">
+                No Account? <a href="#">Contact the admin to create an account</a>
+              </p>
+            </div>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
-      </form>
-      <p class="lead mt-4">
-        No Account? <a href="/users/register">Register</a>
-      </p>
-    </div>
+      </div>
   </div>
 </div>
+
+<script>
+  const list = document.getElementById('users-list');
+
+</script>

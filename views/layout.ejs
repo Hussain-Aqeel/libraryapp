@@ -6,7 +6,6 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@200&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
-  <title>Luxury Cars - Node.js</title>
 </head>
 
 <body>
@@ -40,11 +39,10 @@
 
       <!-- Grid column -->
       <div class="col-md-8 col-12 mt-5">
-        <p style="line-height: 1.7rem">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem
-          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-          explicabo.
-          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</p>
+        <blockquote class="blockquote text-center lead">
+          <p class="mb-0">The cars we drive say a lot about us.</p>
+          <footer class="blockquote-footer">Alexandra Paul</footer>
+        </blockquote>
       </div>
       <!-- Grid column -->
 
@@ -61,27 +59,23 @@
         <div class="my-3 flex flex-center text-center">
 
           <!-- Facebook -->
-          <a href="#" class="mr-4" style="text-decoration: none;">
+          <a href="../facebook" class="mr-4" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
             <i class="fa fa-facebook fa-2x"> </i>
           </a>
           <!-- Twitter -->
-          <a href="#" class="mr-4" style="text-decoration: none;">
+          <a href="../twitter" class="mr-4" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
             <i class="fa fa-twitter fa-2x"> </i>
           </a>
-          <!-- Google +-->
-          <a href="#" class="mr-4" style="text-decoration: none;">
-            <i class="fa fa-google-plus fa-2x"> </i>
-          </a>
           <!--Linkedin -->
-          <a href="#" class="mr-4" style="text-decoration: none;">
+          <a href="../linkedin" class="mr-4" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
             <i class="fa fa-linkedin fa-2x"> </i>
           </a>
           <!--Instagram-->
-          <a href="#" class="mr-4" style="text-decoration: none;">
+          <a href="../instagram" class="mr-4" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
             <i class="fa fa-instagram fa-2x"> </i>
           </a>
           <!--Pinterest-->
-          <a href="#" class="mr-4" style="text-decoration: none;">
+          <a href="../pinterest" class="mr-4" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
             <i class="fa fa-pinterest fa-2x"> </i>
           </a>
 
@@ -108,5 +102,12 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script>
+      $('.dropdown-toggle').dropdown();
+      $('#users-list a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
+    </script>
 </body>
 </html>

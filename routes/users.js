@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const nodemailer = require('nodemailer');
 const { ensureAuthenticated } = require('../config/auth');
+const ObjectID = require('mongodb').ObjectID;
 
 // User model
 const User = require('../models/User');
@@ -11,31 +12,46 @@ const User = require('../models/User');
 // Login Page
 router.get('/login', (req, res) => res.render('login'));
 
-// Login Page
+// account info page
 router.get('/account-info', (req, res) => { 
   res.locals.name = req.user.name;
   res.locals.email = req.user.email;
-  res.render('account-info', { name: res.locals.name,
-  email: res.locals.email })});
+  res.render('account-info', { 
+    name: res.locals.name,
+    email: res.locals.email 
+  })
+});
+
+// manager dashboard
+router.get('/manager-dashboard', (req, res) => { 
+  res.locals.name = req.user.name;
+  res.locals.email = req.user.email;
+  res.render('manager-dashboard', {
+     name: res.locals.name,
+    email: res.locals.email 
+  })
+});
 
 // dashboard page
 router.get('/dashboard', ensureAuthenticated, (req, res) => 
+{
+  if(req.user) {
+    res.locals.name = req.user.name;
+    res.render('dashboard', { 
+      name: res.locals.name,
+      login: res.locals.login 
+    })
+  } else {
+    res.render('dashboard');
+  }
+});
+
+// checkout page
+router.get('/checkout', (req, res) => 
 { 
   res.locals.name = req.user.name;
   res.locals.email = req.user.email;
-  res.render('dashboard', { name: res.locals.name });
-  console.log(req.user.name); 
-  console.log(res.locals.name); 
-  console.log(typeof req.user.name); 
-  console.log(typeof res.locals.name); 
-
-});
-
-// homepage Page
-router.get('/homepage', (req, res) => {
-  // res.locals.name = req.user.name;
-  // res.render('homepage', { name: res.locals.name });
-  res.render('homepage');
+  res.render('checkout', { name: res.locals.name }); 
 });
 
 // Register Page
@@ -43,30 +59,41 @@ router.get('/register', (req, res) => res.render('register'));
 
 // About Page
 router.get('/about', (req, res) => {
-  // res.locals.name = req.user.name;
-  // console.log(req.user);
-  res.render('about');
-  // if(typeof req.user.name == 'undefined') { 
-  //   res.render('about');
-  // } 
-  // else if(typeof req.user.name != 'undefined') {
-  //   // res.locals.name = req.user.name;
-  //   res.render('about', { name: req.user.name });
-  // }
+  if(req.user) {
+    res.locals.name = req.user.name;
+    res.render('about', { 
+      name: res.locals.name,
+      login: res.locals.login 
+    })
+  } else {
+    res.render('about');
+  }
 });
 
 // Contact Page
 router.get('/contact', (req, res) => {
-    // res.locals.name = req.user.name;
-    // res.render('contact', { name: res.locals.name });
+  if(req.user) {
+    res.locals.name = req.user.name;
+    res.render('contact', { 
+      name: res.locals.name,
+      login: res.locals.login 
+    })
+  } else {
     res.render('contact');
+  }
 });
 
 // Cars Page
 router.get('/cars', (req, res) => {
-  // res.locals.name = req.user.name;
-  // res.render('cars', { name: res.locals.name })
-  res.render('cars');
+  if(req.user) {
+    res.locals.name = req.user.name;
+    res.render('cars', { 
+      name: res.locals.name,
+      login: res.locals.login 
+    })
+  } else {
+    res.render('cars');
+  }
 });
 
 // Register Handle
@@ -99,6 +126,8 @@ router.post('/register', (req, res) => {
     });
   } else {
     // Validation passed
+    const status = 'customer';
+    const cars = null;
     User.findOne({ email: email })
     .then(user =>{
       if(user) {
@@ -115,7 +144,9 @@ router.post('/register', (req, res) => {
         const newUser = new User({
           name,
           email,
-          password
+          password,
+          status,
+          cars
         });
 
         // Hash password
@@ -158,49 +189,98 @@ router.get('/logout', (req, res) => {
 
 // contact handle - nodemailer
 router.post('/send', (req, res) => {
-  const output = `<p> You have a new contact request </p>
-  <h3>Contact Details</h3>
-  <br><br>
-  <ul>
-    <li>Name: ${req.body.name}</li>
-    <li>Email: ${req.body.email}</li>
-    <li>Phone Number: ${req.body.phone}</li>
-    <li>Subject: ${req.body.subject}</li>
-  </ul>
-  <br><br>
-  <h3>Message</h3>
-  <br>
-  <p>${req.body.message}</p>
-  `;
+  const { name, email, phone, subject, message} = req.body;
+  let errors = [];
 
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: 'h.aljassim.1999@gmail.com', // generated ethereal user
-      pass: '1267490hh', // generated ethereal password
-    },
-    tls:{
-      rejectUnauthorized: false
-    }
-  });
+  // Check required fields
+  if(!name || !email || !phone || !subject || !message) {
+    errors.push({ msg: 'Please fill in all fields.' });
+  }
 
-  // send mail with defined transport object
-  let info = transporter.sendMail({
-    from: '"Luxury Cars App" <h.aljassim.1999@gmail.com>', // sender address
-    to: "s201779630@kfupm.edu.sa, hussain@ljassim.tech", // list of receivers
-    subject: "Luxury Cars - contact form", // Subject line
-    text: " ", // plain text body
-    html: output // html body
-  });
+  if(errors.length > 0) {
+    res.render('contact', {
+      errors,
+      name,
+      email,
+      phone,
+      subject, 
+      message
+    });
+  } else {
+    const output = 
+  `<p> You have a new contact request </p>
+    <h3>Contact Details</h3>
+    <br><br>
+    <ul>
+      <li>Name: ${req.body.name}</li>
+      <li>Email: ${req.body.email}</li>
+      <li>Phone Number: ${req.body.phone}</li>
+      <li>Subject: ${req.body.subject}</li>
+    </ul>
+    <br><br>
+    <h3>Message</h3>
+    <br>
+    <p>${req.body.message}</p>
+    `;
 
-  console.log("Message sent: %s", info.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: 'h.aljassim.1999@gmail.com', // generated ethereal user
+        pass: '1267490hh', // generated ethereal password
+      },
+      tls:{
+        rejectUnauthorized: false
+      }
+    });
 
-  req.flash('success_msg', 'Your email has been sent! we are looking forward to hear you out.');
-  res.redirect('/users/contact');
+    // send mail with defined transport object
+    let info = transporter.sendMail({
+      from: '"Luxury Cars App" <h.aljassim.1999@gmail.com>', // sender address
+      to: "s201779630@kfupm.edu.sa, hussain@ljassim.tech", // list of receivers
+      subject: "Luxury Cars - contact form", // Subject line
+      text: " ", // plain text body
+      html: output // html body
+    });
+
+    console.log("Message sent: %s", info.messageId);
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+    req.flash('success_msg', 'Your email has been sent! we are looking forward to hear you out.');
+    res.redirect('/users/contact');
+  }
 });
+
+// router.post('/editName', (req, res) => {
+//   const name = document.getElementById('name');
+
+//   if(name != '') {
+//     User.findById(req.user.id, function (err, user) {
+//       user.name = name;
+//       user.local.name = name; 
+  
+//       // don't forget to save!
+//       user.save(function (err) {
+//           res.redirect('/account-info');
+//       });
+//     });
+//   }
+// });
+
+// router.put('/update', function(req, res, next) {
+//   let name = req.body.name;
+
+// });
+// router.post('/editEmail', (req, res) => {
+
+
+// });
+// router.post('/editPassword', (req, res) => {
+
+
+// });
 
 module.exports = router;

@@ -1,11 +1,11 @@
 const LocalStrategy = require('passport-local').Strategy;
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 // Load User Model
 const User = require('../models/User');
 
-module.exports = function (passport) {
+module.exports = function (passport) 
+{
   passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       // Match User
@@ -35,10 +35,10 @@ module.exports = function (passport) {
   });
 
 
- passport.deserializeUser(function(id, done) {
-   User.findById(id, function (err, user) {
-     done(err, user);
-   });
- });   
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function (err, user) {
+      done(err, user);
+    });
+  });   
 
 }

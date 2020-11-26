@@ -1,4 +1,4 @@
-<% if(typeof name === 'undefined') { %>
+<% if(!login) { %>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
       <a class="navbar-brand" href="../">Luxury Cars</a>
@@ -34,14 +34,14 @@
   </nav>
 <% } else { %>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
+    <div class="container d-flex align-items-med-center justify-content-med-center align-content-med-center">
       <a class="navbar-brand" href="../">Luxury Cars</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     
       <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto d-flex bg-primary align-items-md-center justify-content-md-center w-100">
           <li id="homeLi" class="nav-item">
             <a id="home" class="nav-link" href="../">Home</a>
           </li>
@@ -54,12 +54,17 @@
           <li id="contactLi" class="nav-item">
             <a id="contact" class="nav-link" href="/users/contact">Contact</a>
           </li>
-          <li class="lead nav-item justify-self-end">Welcome <%= name %></li>
-        </ul>
-        <ul class="navbar-nav d-flex justify-content-end align-items-center align-content-center">
-          <li class="nav-item nav-link">
-            <a href="/users/logout" class="btn btn-info rounded">Logout</a>
+          <li class="nav-item dropdown lead ml-md-auto">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Welcome <%= name %></a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/users/dashboard">Dashboard</a>
+              <a class="dropdown-item" href="/users/account-info">Account</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-white bg-danger" href="/users/logout">Logout</a>
+            </div>
           </li>
+
+          <!--<li class="lead nav-item justify-self-end mt-2">Welcome <%= name %></li>-->
         </ul>
       </div>
     </div>
