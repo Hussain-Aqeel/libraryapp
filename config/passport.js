@@ -2,7 +2,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 
 // Load User Model
-const User = require('../models/User');
 const LibraryMember = require('../models/LibraryMember');
 const Librarian = require('../models/Librarian');
 const System = require('../models/System');
@@ -12,7 +11,7 @@ module.exports = function (passport)
   passport.use('member-local',
     new LocalStrategy({ usernameField: 'id' }, (id, password, done) => {
       // Match User
-      LibraryMember.findOne({ People_ID: id })
+      LibraryMember.findOne({ _id: id })
         .then(member => {
           if(!member) {
             return done(null, false, { message: 'That id is not registered as a member.' })
@@ -36,7 +35,7 @@ module.exports = function (passport)
   passport.use('librarian-local',
     new LocalStrategy({ usernameField: 'id' }, (id, password, done) => {
       // Match User
-      Librarian.findOne({ People_ID: id })
+      Librarian.findOne({ _id: id })
         .then(librarian => {
           if(!librarian) {
             return done(null, false, { message: 'That id is not registered as a librarian.' })
@@ -60,7 +59,7 @@ module.exports = function (passport)
   passport.use('system-local',
   new LocalStrategy({ usernameField: 'id' }, (id, password, done) => {
     // Match User
-    System.findOne({ People_ID: id })
+    System.findOne({ _id: id })
       .then(system => {
         if(!system) {
           return done(null, false, { message: 'That id is not registered as a system.' })

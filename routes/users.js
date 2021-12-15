@@ -26,37 +26,52 @@ const Authors = require('../models/Authors')
 // Login Page
 router.get('/login', (req, res) => res.render('login'));
 
-// account info page
-router.get('/account-info', (req, res) => { 
-  res.locals.name = req.user.name;
-  res.locals.email = req.user.email;
-  res.render('account-info', { 
-    name: res.locals.name,
-    email: res.locals.email 
-  })
-});
 
-// manager dashboard
-router.get('/manager-dashboard', (req, res) => { 
-  res.locals.name = req.user.name;
-  res.locals.email = req.user.email;
-  res.render('manager-dashboard', {
-     name: res.locals.name,
-    email: res.locals.email 
-  })
-});
-
-// dashboard page
-router.get('/dashboard', ensureAuthenticated, (req, res) => 
+// member dashboard
+router.get('/member-dashboard', ensureAuthenticated, (req, res) => 
 {
   if(req.user) {
-    res.locals.name = req.user.name;
-    res.render('dashboard', { 
-      name: res.locals.name,
-      login: res.locals.login 
+    res.locals.First_Name = req.user.First_Name;
+    res.locals.People_ID = req.user.People_ID;
+
+    res.render('member-dashboard', { 
+      name: res.locals.First_Name,
+      login: res.locals.People_ID
     })
   } else {
-    res.render('dashboard');
+    res.render('member-dashboard');
+  }
+});
+
+// member librarian
+router.get('/librarian-dashboard', ensureAuthenticated, (req, res) => 
+{
+  if(req.user) {
+    res.locals.First_Name = req.user.First_Name;
+    res.locals.People_ID = req.user.People_ID;
+
+    res.render('librarian-dashboard', { 
+      name: res.locals.First_Name,
+      login: res.locals.People_ID
+    })
+  } else {
+    res.render('librarian-dashboard');
+  }
+});
+
+// member dashboard
+router.get('/system-dashboard', ensureAuthenticated, (req, res) => 
+{
+  if(req.user) {
+    res.locals.First_Name = req.user.First_Name;
+    res.locals.People_ID = req.user.People_ID;
+
+    res.render('system-dashboard', { 
+      name: res.locals.First_Name,
+      login: res.locals.People_ID
+    })
+  } else {
+    res.render('system-dashboard');
   }
 });
 
