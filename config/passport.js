@@ -9,9 +9,11 @@ const System = require('../models/System');
 module.exports = function (passport) 
 {
   passport.use('member-local',
-    new LocalStrategy({ usernameField: 'id' }, (id, password, done) => {
+    new LocalStrategy({ 
+      usernameField: 'member-id',
+      passwordField: 'member-password' }, (id, password, done) => {
       // Match User
-      LibraryMember.findOne({ _id: id })
+      LibraryMember.findOne({ People_ID: id })
         .then(member => {
           if(!member) {
             return done(null, false, { message: 'That id is not registered as a member.' })
@@ -33,9 +35,11 @@ module.exports = function (passport)
   );
 
   passport.use('librarian-local',
-    new LocalStrategy({ usernameField: 'id' }, (id, password, done) => {
+    new LocalStrategy({ 
+      usernameField: 'librarian-id',
+      passwordField: 'librarian-password' }, (id, password, done) => {
       // Match User
-      Librarian.findOne({ _id: id })
+      Librarian.findOne({ People_ID: id })
         .then(librarian => {
           if(!librarian) {
             return done(null, false, { message: 'That id is not registered as a librarian.' })
@@ -57,9 +61,11 @@ module.exports = function (passport)
   );
 
   passport.use('system-local',
-  new LocalStrategy({ usernameField: 'id' }, (id, password, done) => {
+  new LocalStrategy({ 
+    usernameField: 'system-id',
+    passwordField: 'system-password' }, (id, password, done) => {
     // Match User
-    System.findOne({ _id: id })
+    System.findOne({ People_ID: id })
       .then(system => {
         if(!system) {
           return done(null, false, { message: 'That id is not registered as a system.' })
