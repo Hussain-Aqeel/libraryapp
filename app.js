@@ -52,8 +52,8 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
-  res.locals.name = req.body.name;
-  res.locals.email = req.body.email;
+  res.locals.First_Name = req.body.First_Name;
+  res.locals.People_ID = req.body.People_ID;
   res.locals.login = req.isAuthenticated();
   // res.locals.users = db.users;
   next();
@@ -63,24 +63,6 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use("/img", express.static("./img"));
-
-// Social media redirection
-app.get("/twitter", (req, res) => {
-  res.status(301).redirect("https://www.twitter.com")
-});
-app.get("/facebook", (req, res) => {
-  res.status(301).redirect("https://www.facebook.com")
-});
-app.get("/pinterest", (req, res) => {
-  res.status(301).redirect("https://www.pinterest.com")
-});
-app.get("/instagram", (req, res) => {
-  res.status(301).redirect("https://www.instagram.com")
-});
-app.get("/linkedin", (req, res) => {
-  res.status(301).redirect("https://www.linkedin.com")
-});
-
 
 const PORT = process.env.PORT || 5000;
 

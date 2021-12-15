@@ -1,4 +1,4 @@
-<title>Luxury Cars - Login</title>
+<title>Library App - Login</title>
 
 <!-- CARD WITH NAV -->
 <div class="mt-5">
@@ -7,106 +7,94 @@
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" id="users-list" role="tablist">
             <li class="nav-item">
-              <a class="nav-link font-weight-bold active" href="#user" role="tab" aria-controls="user" aria-selected="true">User</a>
+              <a class="nav-link font-weight-bold active" href="#member" role="tab" aria-controls="Member" aria-selected="true">Member</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link font-weight-bold"  href="#employee" role="tab" aria-controls="employee" aria-selected="false">Employee</a>
+              <a class="nav-link font-weight-bold"  href="#librarian" role="tab" aria-controls="Librarian" aria-selected="false">Librarian</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link font-weight-bold" href="#manager" role="tab" aria-controls="manager" aria-selected="false">Manager</a>
+              <a class="nav-link font-weight-bold" href="#system" role="tab" aria-controls="System" aria-selected="false">System</a>
             </li>
           </ul>
         </div>
         <div class="card-body">
-          <h1 class="text-center mb-3"><i class="fa fa-sign-in"></i>  Login</h1>          
+          <h1 class="text-center mb-3"><i class="fa fa-sign-in"></i>Login</h1>          
           
 
            <div class="tab-content mt-3">
-           <div class="tab-pane active" id="user" role="tabpanel">
+           <div class="tab-pane active" id="member" role="tabpanel">
             <%- include('./partials/messages') %>
-            <form action="/users/login" method="POST">
+            <form action="/users/login-member" method="POST">
               <div class="form-group">
-                <label for="email">Email</label>
+                <label for="id">ID</label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
+                  id="member-id"
+                  name="member-id"
                   class="form-control"
-                  placeholder="Enter Email"
+                  placeholder="Enter Your Member ID"
                 />
               </div>
               <div class="form-group">
-                <label for="password">Password</label>
+                <label for="member-password">Password</label>
                 <input
                   type="password"
-                  id="password"
-                  name="password"
-                  class="form-control"
-                  placeholder="Enter Password"
+                  id="member-password"
+                  name="member-password"
+                  class="form-control""
                 />
               </div>
               <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
-            <p class="lead mt-4">
-              No Account? <a href="/users/register">Register</a>
-            </p>
             </div>
              
-            <div class="tab-pane" id="employee" role="tabpanel" aria-labelledby="history-tab"> 
-              <form>
+            <div class="tab-pane" id="librarian" role="tabpanel" aria-labelledby="librarian-tab"> 
+              <form action="/users/login-librarian" method="POST">
                 <div class="form-group">
-                  <label for="email">Email</label>
+                  <label for="librarian-id">ID</label>
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
+                    id="librarian-id"
+                    name="librarian-id"
                     class="form-control"
-                    placeholder="Enter Email"
+                    placeholder="Enter Librarian ID"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="id">ID</label>
+                  <label for="librarian-password">Password</label>
                   <input
-                    type="id"
-                    id="id"
-                    name="id"
+                    type="password"
+                    id="librarian-password"
+                    name="librarian-password"
                     class="form-control"
-                    placeholder="Enter id"
                   />
-                  <small class="form-text text-muted">Enter the ID that has been created by your manager</small>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
               </form> 
               
             </div>
              
-            <div class="tab-pane" id="manager" role="tabpanel" aria-labelledby="manager-tab">
-              <form>
+            <div class="tab-pane" id="system" role="tabpanel" aria-labelledby="system-tab">
+              <form action="/users/login-system" method="POST">
                 <div class="form-group">
-                  <label for="email">Email</label>
+                  <label for="system-id">ID</label>
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
+                    id="system-id"
+                    name="system-id"
                     class="form-control"
-                    placeholder="Enter Email"
+                    placeholder="Enter System ID"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="password">Password</label>
+                  <label for="system-password">Password</label>
                   <input
                     type="password"
-                    id="password"
-                    name="password"
+                    id="system-password"
+                    name="system-password"
                     class="form-control"
-                    placeholder="Enter Password"
                   />
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
               </form>
-              <p class="lead mt-4">
-                No Account? <a href="#">Contact the admin to create an account</a>
-              </p>
+             
             </div>
           </div>
         </div>
