@@ -11,9 +11,9 @@ module.exports = function (passport)
   passport.use('member-local',
     new LocalStrategy({ 
       usernameField: 'member-id',
-      passwordField: 'member-password' }, (id, password, done) => {
+      passwordField: 'member-password' }, (username, password, done) => {
       // Match User
-      LibraryMember.findOne({ People_ID: id })
+      LibraryMember.findOne({ People_ID: username })
         .then(member => {
           if(!member) {
             return done(null, false, { message: 'That id is not registered as a member.' })
