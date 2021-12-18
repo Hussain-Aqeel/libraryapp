@@ -11,13 +11,13 @@ module.exports = {
     if (!req.isAuthenticated()) {
       return next();
     }
-    if(req.body.People_Type == 1){
+    if(req.body.People_Type == "1"){
       res.redirect('/users/librarian-dashboard');      
     }
-    if(req.body.People_Type == 2){
+    if(req.body.People_Type == "2"){
       res.redirect('/users/member-dashboard');      
     }
-    else {
+    if(req.body.People_Type == "4") {
       res.redirect('/users/system-dashboard');      
     }
   }

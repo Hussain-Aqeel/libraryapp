@@ -25,7 +25,7 @@
   </nav>
   <% } else { %>
 
-  <% if((type == '1') && login) {%>
+  <% if(type == "1") {%>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container d-flex align-items-med-center justify-content-med-center align-content-med-center">
         <a class="navbar-brand" href="../">Library App</a>
@@ -54,7 +54,7 @@
         </div>
       </div>
     </nav>
-    <%} if (type === '2') {%>
+    <%} if (type == "2") {%>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container d-flex align-items-med-center justify-content-med-center align-content-med-center">
         <a class="navbar-brand" href="../">Library App</a>
@@ -80,7 +80,7 @@
         </div>
       </div>
     </nav>
-    <%} else {%>
+    <%} if(type == "4") {%>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container d-flex align-items-med-center justify-content-med-center align-content-med-center">
         <a class="navbar-brand" href="../">Library App</a>
