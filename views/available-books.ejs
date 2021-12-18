@@ -1,0 +1,35 @@
+<div class="container">
+  <br>
+  <h1 class="ml-4">Books</h1>  
+  <br>
+<hr>
+  
+<% if(details) { %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ISBN</th>
+        <th scope="col">Title</th>
+        <th scope="col">Language</th>
+        <th scope="col">Subject ID</th>
+        <th scope="col">number of copies</th>
+        <th scope="col">Availability</th> 
+        <th scope="col">Publication Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% details.forEach(function(item){ %>
+      <tr class="table-light">
+        <td><%= item.ISBN_Code %></td>
+        <td><%= item.Book_Title %></td>
+        <td><%= item.Book_Language %></td>
+        <td><%= item.Subject_ID %></td>
+        <td><%= item.No_Of_Copies %></td>
+        <td><%= item.Is_Available %></td>
+        <td><%= item.Publication_Year %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+</div>

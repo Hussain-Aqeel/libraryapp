@@ -18,7 +18,11 @@ router.get('/', (req, res) => {
        
     })
   } else {
-    res.render('homepage');
+    res.render('homepage', {
+      name: null,
+      login: null,
+      type: null
+    });
   }
 });
 
@@ -35,7 +39,11 @@ router.get('/login', (req, res) => {
        
     })
   } else {
-    res.render('login');
+    res.render('login', {
+      name: null,
+      login: null,
+      type: null
+    });
   }
 });
 
@@ -52,7 +60,11 @@ router.get('/register', (req, res) => {
        
     })
   } else {
-    res.render('register');
+    res.render('register', {
+      name: null,
+      login: null,
+      type: null
+    });
   }
 });
 

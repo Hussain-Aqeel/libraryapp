@@ -92,12 +92,9 @@ module.exports = function (passport)
     new LocalStrategy({ 
       usernameField: 'member-id',
       passwordField: 'member-password'}, (username, password, done) => {
-        console.log(username);
-        console.log(password);
       // Match User
       LibraryMember.findOne({ People_ID:username })
         .then(member => {
-          console.log(member)
           if(!member) {
             return done(null, false, { message: 'That id is not registered as a member.' })
           }
@@ -111,8 +108,6 @@ module.exports = function (passport)
             if(isMatch) {
               return done(null, member);
             } else {
-              console.log(username)
-              console.log(password)
               return done(null, false, { message: 'Password incorrect' })
             }
           });
@@ -128,7 +123,6 @@ module.exports = function (passport)
       // Match User
       Librarian.findOne({ People_ID: username })
         .then(librarian => {
-          console.log(librarian)
           if(!librarian) {
             return done(null, false, { message: 'That id is not registered as a librarian.' })
           }
@@ -155,7 +149,6 @@ module.exports = function (passport)
     // Match User
     System.findOne({ People_ID: id })
       .then(system => {
-        console.log(system)
         if(!system) {
           return done(null, false, { message: 'That id is not registered as a system.' })
         }
