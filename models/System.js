@@ -47,6 +47,6 @@ const SystemSchema = new mongoose.Schema({
   } 
 });
 
-const System = mongoose.model('system', SystemSchema);
+const System = mongoose.model('systems', SystemSchema);
 
 module.exports = System;

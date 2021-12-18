@@ -15,6 +15,6 @@ const BookShelfSchema = new mongoose.Schema({
   }
 });
 
-const BookShelf = mongoose.model('bookShelf', BookShelfSchema);
+const BookShelf = mongoose.model('bookshelfs', BookShelfSchema);
 
 module.exports = BookShelf;

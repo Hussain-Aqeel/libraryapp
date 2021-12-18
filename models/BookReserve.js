@@ -19,6 +19,6 @@ const BookReserveSchema = new mongoose.Schema({
   }
 });
 
-const BookReserve = mongoose.model('bookReserve', BookReserveSchema);
+const BookReserve = mongoose.model('bookreserves', BookReserveSchema);
 
 module.exports = BookReserve;

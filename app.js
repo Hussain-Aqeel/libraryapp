@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const flash = require('connect-flash');
 const session = require('express-session');
+const bodyParser = require("body-parser");
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
+const csp = require('express-csp-header');
 const app = express();
 
 // Passport (Authentication library) Config 
@@ -26,7 +29,7 @@ app.set('view engine', 'ejs');
 // wrap in the deafult layout
 
 
-// Bodyparser
+// Body-parser
 app.use(express.urlencoded(
   { extended: false }
 ));
@@ -52,8 +55,9 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
-  res.locals.First_Name = req.body.First_Name;
+  res.locals.First_Name = req.First_Name;
   res.locals.People_ID = req.body.People_ID;
+  res.locals.People_Type = req.body.People_Type;
   res.locals.login = req.isAuthenticated();
   // res.locals.users = db.users;
   next();
@@ -63,6 +67,20 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use("/img", express.static("./img"));
+
+
+const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
+// other app.use() options ...
+app.use(expressCspHeader({ 
+    policies: { 
+        'default-src': [expressCspHeader.NONE], 
+        'img-src': [expressCspHeader.SELF], 
+    } 
+}));  
+
+const cors = require('cors'); 
+app.use(cors());
+
 
 const PORT = process.env.PORT || 5000;
 

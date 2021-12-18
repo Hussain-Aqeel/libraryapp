@@ -47,6 +47,6 @@ const LibrarianSchema = new mongoose.Schema({
   } 
 });
 
-const Librarian = mongoose.model('librarian', LibrarianSchema);
+const Librarian = mongoose.model('librarians', LibrarianSchema);
 
 module.exports = Librarian;

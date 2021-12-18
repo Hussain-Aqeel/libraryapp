@@ -11,6 +11,6 @@ const LibraryActorSchema = new mongoose.Schema({
   }
 });
 
-const LibraryActor = mongoose.model('libraryActor', LibraryActorSchema);
+const LibraryActor = mongoose.model('libraryactors', LibraryActorSchema);
 
 module.exports = LibraryActor;

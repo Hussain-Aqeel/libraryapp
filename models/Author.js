@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const AuthorsSchema = new mongoose.Schema({
+const AuthorSchema = new mongoose.Schema({
   People_ID: {
     type: String,
     required: true
@@ -47,6 +47,6 @@ const AuthorsSchema = new mongoose.Schema({
   } 
 });
 
-const Authors = mongoose.model('authors', AuthorsSchema);
+const Author = mongoose.model('authors', AuthorSchema);
 
-module.exports = Authors;
+module.exports = Author;

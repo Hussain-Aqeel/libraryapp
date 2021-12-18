@@ -14,7 +14,7 @@ const LibraryMemberSchema = new mongoose.Schema({
     required: true
   },
   People_Type: {
-    type: Number,
+    type: String,
     required: true
   },
   Birth_Date: {
@@ -47,6 +47,6 @@ const LibraryMemberSchema = new mongoose.Schema({
   } 
 });
 
-const LibraryMember = mongoose.model('libraryMember', LibraryMemberSchema);
+const LibraryMember = mongoose.model('librarymembers', LibraryMemberSchema);
 
 module.exports = LibraryMember;

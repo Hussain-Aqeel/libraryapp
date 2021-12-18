@@ -24,7 +24,7 @@
            <div class="tab-content mt-3">
            <div class="tab-pane active" id="member" role="tabpanel">
             <%- include('./partials/messages') %>
-            <form action="/users/login-member" method="POST">
+            <form action="/login-member" method="POST">
               <div class="form-group">
                 <label for="member-id">ID</label>
                 <input
@@ -48,7 +48,7 @@
             </div>
              
             <div class="tab-pane" id="librarian" role="tabpanel" aria-labelledby="librarian-tab"> 
-              <form action="/users/login-librarian" method="POST">
+              <form action="/login-librarian" method="POST">
                 <div class="form-group">
                   <label for="librarian-id">ID</label>
                   <input
@@ -73,7 +73,7 @@
             </div>
              
             <div class="tab-pane" id="system" role="tabpanel" aria-labelledby="system-tab">
-              <form action="/users/login-system" method="POST">
+              <form action="/login-system" method="POST">
                 <div class="form-group">
                   <label for="system-id">ID</label>
                   <input

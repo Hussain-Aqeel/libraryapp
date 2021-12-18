@@ -27,6 +27,6 @@ const BookLoanSchema = new mongoose.Schema({
   }
 });
 
-const BookLoan = mongoose.model('bookLoan', BookLoanSchema);
+const BookLoan = mongoose.model('bookloans', BookLoanSchema);
 
 module.exports = BookLoan;
