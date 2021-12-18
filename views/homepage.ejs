@@ -1,7 +1,33 @@
 <title>Library App - Home</title>
+<% if (!type) {%>
+  <header id="showcase">
+    <div class="container">
+      <div class="showcase-container">
+        <div class="showcase-content">
+          <h1>Welcome</h1>
+          <p>Login to your account to access your data</p>
+          <a class="btn btn-outline-light rounded mt-4" href="/login">Start</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <% } %>
+  <% if(type) {%>
+    <header id="showcase">
+      <div class="container">
+        <div class="showcase-container">
+          <div class="showcase-content">
+            <h2>Welcome Again, <%= First_Name %></h2>
+            <p>Enjoy our amazing collection of books!</p>
+            <a class="btn btn-outline-light rounded mt-4" href="/users/available-books">Browse books</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <% } %>
 
 <style>
-  h1 {
+  h2 {
     color: #fff;
   }
 
@@ -42,18 +68,6 @@
   }
 
 </style>
-  <header id="showcase">
-    <div class="container">
-      <div class="showcase-container">
-        <div class="showcase-content">
-          <h1>Welcome</h1>
-          <p>Login to your account to access your data</p>
-          <a class="btn btn-outline-light rounded mt-4" href="/login">Start</a>
-        </div>
-      </div>
-    </div>
-  </header>
-
     <script>
       const parentLi = document.getElementById('homeLi');
       parentLi.classList.add('active');
