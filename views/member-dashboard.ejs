@@ -1,8 +1,80 @@
-  <div class="container mb-5">
-    <h1 class="mt-4">Dashboard</h1>
+<title>Library App - Member Dashboard</title>
+<div class="container mb-5">
+  <h1 class="mt-4 d-flex justify-content-between"><%= First_Name %><span class="lm-5 mb-2 lg-sm badge rounded-pill bg-warning">MEMBER</span></h1>
+  <br>
+  <br>
+  <hr>
+  <h1 class="ml-4">Reservations</h1>  
+  <br>
+  <br>
+  <% let counter = 1; %>
+  <% if(reservations) { %>
+    <table class="table table-hover" id="table">
+      <thead>
+        <tr class="header">
+          <th scope="col">Borrower_ID</th>
+          <th scope="col">Reserve_Date</th>
+          <th scope="col">ISBN_Code</th>
+          <th scope="col">Status</th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody class="items">
+        <% reservations.forEach(function(item){ %>
+          <% if(item.Status == 'N') {%>
+            <tr class="table-light" id="<%= counter++ %> ">
+              <td class="isbn row-data"><%= item.Borrower_ID %></td>
+              <td class="title row-data"><%= item.Reserve_Date %></td>
+              <td class="lang row-data"><%= item.ISBN_Code %></td>
+              <td class="subject row-data"><%= item.Status %></td>
+              <td><button type="button" 
+                class="btn btn-danger" 
+                data-toggle="modal" 
+                data-target="#borrow-modal">cancel</button></td>
+            </tr>
+            <% } %> 
+          <% }) %>
+      </tbody>
+    </table>
+  <% } %>
 
-    <h3>I am a registered Member!</h3>
-    <h3><%= type %> </h3>
-    
-  </div>
-</div>
+
+  <h1 class="ml-4">Borrows</h1>  
+  <br>
+  <br>
+  <% let counter2 = 1; %>
+      <% if(reservations) { %>
+      <table class="table table-hover" id="table2">
+        <thead>
+          <tr class="header">
+            <th scope="col">Borrower_ID</th>
+            <th scope="col">Reserve_Date</th>
+            <th scope="col">ISBN_Code</th>
+            <th scope="col">Status</th>
+            <th scope="col"> </th>
+          </tr>
+        </thead>
+        <tbody class="items">
+          <% reservations.forEach(function(item){ %>
+            <% if(item.Status == 'Y') {%>
+              <tr class="table-light" id="<%= counter2++ %> ">
+                <td class="isbn row-data"><%= item.Borrower_ID %></td>
+                <td class="title row-data"><%= item.Reserve_Date %></td>
+                <td class="lang row-data"><%= item.ISBN_Code %></td>
+                <td class="subject row-data"><%= item.Status %></td>
+                <td><button type="button" 
+                  class="btn btn-danger" 
+                  data-toggle="modal" 
+                  data-target="#borrow-modal">cancel</button></td>
+              </tr>
+            <% } %>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+    </div>
+
+<script>
+
+
+</script>

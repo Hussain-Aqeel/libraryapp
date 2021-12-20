@@ -5,6 +5,8 @@ const MongoClient = require('mongodb').MongoClient;
 const flash = require('connect-flash');
 const session = require('express-session');
 const bodyParser = require("body-parser");
+const multer = require('multer');
+const upload = multer();
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const csp = require('express-csp-header');
@@ -31,8 +33,13 @@ app.set('view engine', 'ejs');
 
 // Body-parser
 app.use(express.urlencoded(
-  { extended: false }
+  { extended: true }
 ));
+app.use(express.json());       // to support JSON-encoded bodies
+
+// for parsing multipart/form-data
+app.use(upload.array()); 
+app.use(express.static('public'));
 
 // Express Session
 app.use(session({
@@ -58,6 +65,7 @@ app.use((req, res, next) => {
   res.locals.First_Name = req.First_Name;
   res.locals.People_ID = req.body.People_ID;
   res.locals.People_Type = req.body.People_Type;
+  res.locals.isbn = req.body.isbn;
   res.locals.login = req.isAuthenticated();
   // res.locals.users = db.users;
   next();

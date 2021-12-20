@@ -12,22 +12,33 @@
     </div>
   </header>
   <% } %>
-  <% if(type) {%>
+  <% if(type == 2) {%>
     <header id="showcase">
       <div class="container">
         <div class="showcase-container">
           <div class="showcase-content">
-            <h2>Welcome Again, <%= First_Name %></h2>
+            <h2 class="mr-5">Welcome Again, <%= First_Name %></h2>
             <p>Enjoy our amazing collection of books!</p>
             <a class="btn btn-outline-light rounded mt-4" href="/users/available-books">Browse books</a>
           </div>
         </div>
       </div>
     </header>
-    <% } %>
+    <% } else {%>
+      <header id="showcase">
+        <div class="container">
+          <div class="showcase-container">
+            <div class="showcase-content">
+              <h2 class="mr-5">Welcome Again, <%= First_Name %></h2>
+              <p>Go to your Dashboard to manage the platform..</p>
+            </div>
+          </div>
+        </div>
+      </header>
+      <% } %>
 
 <style>
-  h2 {
+  h1,h2 {
     color: #fff;
   }
 

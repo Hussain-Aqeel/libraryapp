@@ -1,7 +1,47 @@
-<div class="container mb-5">
-  <h1 class="mt-4">Dashboard</h1>
+<title>Library App - System Dashboard</title>
+<div class="container">
+  <h1 class="mt-4 d-flex justify-content-between"><%= First_Name %><span class="lm-5 mb-2 lg-sm badge rounded-pill bg-warning">SYSTEM</span></h1>
+  <br>
+  <h1 class="mt-4">List Of members</h1>
 
-  <h3>I am a registered System!</h3>
-  
+  <%- include('./partials/messages') %>
+<br>
 </div>
+<div class="container-lg mb-5 ml-5">
+<% let counter = 1; %>
+<% if(members) { %>
+  <table class="table table-hover" id="table">
+    <thead>
+      <tr class="header">
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Birth Date</th>
+        <th scope="col">Sex</th>
+        <th scope="col">Department</th> 
+        <th scope="col">Contact Number</th>
+        <th scope="col">Email</th>
+        <th scope="col"> </th>
+      </tr>
+    </thead>
+    <tbody class="items">
+      <% members.forEach(function(member){ %>
+          <tr class="table-light" id="<%= counter++ %> ">
+            <td class="isbn row-data"><%= member.People_ID %></td>
+            <td class="title row-data"><%= member.First_Name %></td>
+            <td class="lang row-data"><%= member.Last_Name %></td>
+            <td class="subject row-data"><%= member.Birth_Date %></td>
+            <td class="copies row-data"><%= member.Sex %></td>
+            <td class="available row-data"><%= member.Department %></td>
+            <td class="pub row-data"><%= member.Contact_Number %></td>
+            <td class="pub row-data"><%= member.Email %></td>
+            <td><button type="button" 
+              class="btn btn-danger" 
+              data-toggle="modal" 
+              data-target="#delete-modal">delete</button></td>
+          </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>  
 </div>

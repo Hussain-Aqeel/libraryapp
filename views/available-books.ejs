@@ -1,13 +1,23 @@
+<title>Library App - books</title>
 <div class="container">
   <br>
-  <h1 class="ml-4">Books</h1>  
+  <div class="form-group">
+    <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Filter</label>
+    <input class="form-control form-control-lg" type="text" placeholder="Filter by [title, language,...etc]" id="inputLarge" onkeyup="filter()">
+  </div>
   <br>
 <hr>
+<h1 class="ml-4">Books</h1>  
+<br>
+
+<%- include('./partials/messages') %>
+<br>
   
+<% let counter = 1; %>
 <% if(details) { %>
-  <table class="table table-hover">
+  <table class="table table-hover" id="table">
     <thead>
-      <tr>
+      <tr class="header">
         <th scope="col">ISBN</th>
         <th scope="col">Title</th>
         <th scope="col">Language</th>
@@ -15,21 +25,169 @@
         <th scope="col">number of copies</th>
         <th scope="col">Availability</th> 
         <th scope="col">Publication Year</th>
+        <th scope="col"> </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="items">
       <% details.forEach(function(item){ %>
-      <tr class="table-light">
-        <td><%= item.ISBN_Code %></td>
-        <td><%= item.Book_Title %></td>
-        <td><%= item.Book_Language %></td>
-        <td><%= item.Subject_ID %></td>
-        <td><%= item.No_Of_Copies %></td>
-        <td><%= item.Is_Available %></td>
-        <td><%= item.Publication_Year %></td>
-      </tr>
+        <% if (item.Is_Available == 'Y') { %>
+          <tr class="table-light" id="<%= counter++ %> ">
+            <td class="isbn row-data"><%= item.ISBN_Code %></td>
+            <td class="title row-data"><%= item.Book_Title %></td>
+            <td class="lang row-data"><%= item.Book_Language %></td>
+            <td class="subject row-data"><%= item.Subject_ID %></td>
+            <td class="copies row-data"><%= item.No_Of_Copies %></td>
+            <td class="available row-data"><%= item.Is_Available %></td>
+            <td class="pub row-data"><%= item.Publication_Year %></td>
+            <td><button type="button" 
+              class="btn btn-info" 
+              data-toggle="modal" 
+              data-target="#borrow-modal">Borrow</button></td>
+          </tr>
+        <% } else {%>
+          <tr class="table-light" id="<%= counter++ %>">
+            <td class="isbn row-data"><%= item.ISBN_Code %></td>
+            <td class="title row-data"><%= item.Book_Title %></td>
+            <td class="lang row-data"><%= item.Book_Language %></td>
+            <td class="subject row-data"><%= item.Subject_ID %></td>
+            <td class="copies row-data"><%= item.No_Of_Copies %></td>
+            <td class="available row-data"><%= item.Is_Available %></td>
+            <td class="pub row-data"><%= item.Publication_Year %></td>
+            <td><button type="button" 
+              class="btn btn-success reserve" 
+              data-toggle="modal" 
+              data-target="#reserve-modal"
+              >Reserve</button></td>
+          </tr>
+          <% } %>
       <% }) %>
     </tbody>
   </table>
 <% } %>
 </div>
+
+
+
+<div class="modal" id="reserve-modal" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Reservation</h5>
+        <button type="button" class="fas fa-times fa-lg" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>We don't know the exact timing of the selected book to be available again. 
+          click confirm if you want to proceed in reserving the book with the following ISBN Number.</p>
+          <form action="/users/reserve" method="post">
+            <div class="form-group">
+              <label for="isbn">ISBN</label>
+              <input
+                id="isbn"
+                class="isbn-value"
+                name="isbn"
+                class="form-control"
+                disabled
+              />
+            </div>
+            <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="submitReserve">Confirm</button>
+          </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="borrow-modal" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Borrowing</h5>
+        <button type="button" class="fas fa-times fa-lg" data-bs- data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>If you requested borrowing the book, you have to return it at the specific time which shouldn't
+          exceed 5 days. click confirm to borrow the selected book.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <form>
+          <button type="submit" class="btn btn-primary">Confirm</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+        crossorigin="anonymous"></script>
+        
+<script>
+
+  var isbnVal = "";
+
+  $(".reserve").click(function() {
+    var $row = $(this).closest("tr");    // Find the row
+    var $text = $row.find(".isbn").text(); // Find the text
+
+    $('input[name=isbn]').val($text);
+});
+
+$(function(){				
+  $('#submitReserve').click(function(e){
+      e.preventDefault();
+      console.log('submitReserve clicked');
+  var data = {};
+  data.title = "title";
+  data.message = "message";
+  
+  $.ajax({
+    type: 'POST',
+    data: JSON.stringify(data),
+        contentType: 'application/json',
+                url: 'http://localhost:3000/reserve',						
+                success: function(data) {
+                    console.log('success');
+                    console.log(JSON.stringify(data));
+                }
+            })}
+          )})
+</script>
+
+
+<script>
+const filter = () => {
+  const columns = [
+    { name: 'ISBN', index: 0, isFilter: true },
+    { name: 'Title', index: 1, isFilter: true },
+    { name: 'Language', index: 2, isFilter: true },
+    { name: 'Subject ID', index: 3, isFilter: true },
+    { name: 'number of copies', index: 4, isFilter: true },
+    { name: 'Availability', index: 5, isFilter: true },
+    { name: 'Publication Year', index: 6, isFilter: true },
+    { name: 'Borrow', index: 7, isFilter: false },
+    { name: 'Reserve', index: 8, isFilter: false }
+  ]
+  const filterColumns = columns.filter(c => c.isFilter).map(c => c.index)
+  const trs = document.querySelectorAll(`#table tr:not(.header)`)
+  const filter = document.querySelector('#inputLarge').value
+  const regex = new RegExp(escape(filter), 'i')
+  const isFoundInTds = td => regex.test(td.innerHTML)
+  const isFound = childrenArr => childrenArr.some(isFoundInTds)
+  const setTrStyleDisplay = ({ style, children }) => {
+    style.display = isFound([
+      ...filterColumns.map(c => children[c]) // <-- filter Columns
+    ]) ? '' : 'none'
+  }
+  
+  trs.forEach(setTrStyleDisplay)
+}
+
+</script>

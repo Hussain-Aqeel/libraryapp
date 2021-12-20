@@ -11,7 +11,7 @@ const BookReserveSchema = new mongoose.Schema({
   },
   ISBN_Code: {
     type: String,
-    required: true
+    required: false
   },
   Status: {
     type: String,
