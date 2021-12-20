@@ -95,23 +95,19 @@ router.get("/available-books", ensureAuthenticated, function (req, res) {
 
 // Reserve Books
 router.post('/reserve', ensureAuthenticated, (req, res) => {
-  res.json([{
-    isbn: req.body.isbn
-  }])
-  console.log(req.body.isbn);
   res.locals.First_Name = req.user.First_Name;
   res.locals.login = req.user.login;
   res.locals.People_ID = req.user.People_ID;
   res.locals.isbn = req.body.isbn;
+  res.locals.status = req.body.status;
   res.locals.People_Type = req.body.People_Type;
   
-
-  // 
+   
   let bookReserve = new BookReserve({
     Borrower_ID: res.locals.People_ID,
     Reserve_Date: Date.now(),
     ISBN_Code: res.locals.isbn,
-    Status: 'N'
+    Status:   res.locals.status
   });
 
   bookReserve.save()
@@ -134,26 +130,29 @@ router.post('/reserve', ensureAuthenticated, (req, res) => {
       }
     })
   })
+});
+
+// Delete member
+router.post('/delete-member', ensureAuthenticated, (req, res) => {
+  res.locals.First_Name = req.user.First_Name;
+  res.locals.login = req.user.login;
+  res.locals.People_ID = req.user.People_ID;
+  res.locals.People_Type = req.body.People_Type;
+  res.locals.deletedID = req.body.deletedID;
+
+  LibraryMember.findOneAndDelete({ People_ID: res.locals.deletedID }, function (err, docs) {
+    if (err){
+        console.log(err)
+    }
+    else {
+        console.log("Deleted successfully");
+        res.redirect('/users/system-dashboard', forwardAuthenticated, { 
+          name: res.locals.First_Name,
+          login: res.locals.login,
+          type: res.locals.People_Type,
+    })
+  }})
 })
-//   .catch(err => console.log(err));
-//   })
-
-// GET borrow
-// router.get('/reserve', ensureAuthenticated, (req, res) => 
-// {
-//     res.locals.First_Name = req.user.First_Name;
-//     res.locals.login = req.user.login;
-//     res.locals.People_ID = req.user.People_ID;
-//     res.locals.People_Type = req.user.People_Type;
-
-//     res.render('available-books', { 
-//       name: res.locals.First_Name,
-//       login: res.locals.login,
-//       type: res.locals.People_Type,
-//       id: res.locals.People_ID
-//     })
-// });
-
 
 // Logout Handle
 router.get('/logout', (req, res) => {

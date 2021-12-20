@@ -66,6 +66,8 @@ app.use((req, res, next) => {
   res.locals.People_ID = req.body.People_ID;
   res.locals.People_Type = req.body.People_Type;
   res.locals.isbn = req.body.isbn;
+  res.locals.status = req.body.status;
+  res.locals.deletedID = req.body.deletedID;
   res.locals.login = req.isAuthenticated();
   // res.locals.users = db.users;
   next();

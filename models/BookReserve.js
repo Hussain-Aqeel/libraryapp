@@ -15,7 +15,7 @@ const BookReserveSchema = new mongoose.Schema({
   },
   Status: {
     type: String,
-    required: true
+    required: false
   }
 });
 

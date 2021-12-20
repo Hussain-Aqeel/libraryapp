@@ -6,6 +6,24 @@
 
   <%- include('./partials/messages') %>
 <br>
+
+<div id="isbnForm" class="d-flex justify-content-between" style="display: none !important;">
+  <div></div>
+  <form action="/users/delete-member" method="post">
+    <div class="form-group">
+      <label class="col-form-label col-form-label-sm mt-4" for="isbn">Delete member with following ID?</label>
+      <input class="form-control form-control-sm"
+              disabled 
+              name="deletedID" 
+              type="text" 
+              id="deletedID"
+              value="<%= typeof deletedID != 'undefined' ? deletedID : '' %>"
+              >
+    </div>
+    <button type="submit" class="btn btn-info">Confirm</button>
+  </form>
+</div>
+
 </div>
 <div class="container-lg mb-5 ml-5">
 <% let counter = 1; %>
@@ -27,21 +45,39 @@
     <tbody class="items">
       <% members.forEach(function(member){ %>
           <tr class="table-light" id="<%= counter++ %> ">
-            <td class="isbn row-data"><%= member.People_ID %></td>
-            <td class="title row-data"><%= member.First_Name %></td>
-            <td class="lang row-data"><%= member.Last_Name %></td>
-            <td class="subject row-data"><%= member.Birth_Date %></td>
-            <td class="copies row-data"><%= member.Sex %></td>
-            <td class="available row-data"><%= member.Department %></td>
-            <td class="pub row-data"><%= member.Contact_Number %></td>
-            <td class="pub row-data"><%= member.Email %></td>
+            <td class="id row-data"><%= member.People_ID %></td>
+            <td class="fname row-data"><%= member.First_Name %></td>
+            <td class="lname row-data"><%= member.Last_Name %></td>
+            <td class="dob row-data"><%= member.Birth_Date %></td>
+            <td class="sex row-data"><%= member.Sex %></td>
+            <td class="department row-data"><%= member.Department %></td>
+            <td class="phone row-data"><%= member.Contact_Number %></td>
+            <td class="email row-data"><%= member.Email %></td>
             <td><button type="button" 
-              class="btn btn-danger" 
-              data-toggle="modal" 
-              data-target="#delete-modal">delete</button></td>
+              class="btn btn-danger click" onclick="showForm()">delete</button></td>
           </tr>
       <% }) %>
     </tbody>
   </table>
 <% } %>  
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+        crossorigin="anonymous"></script>
+        
+<script>
+  $(".click").click(function() {
+    var $row = $(this).closest("tr");    // Find the row
+    var $text = $row.find(".id").text(); // Find the text
+
+    $('input[name=deletedID]').val($text);
+
+});
+</script>
+
+<script>
+  function showForm() {
+  document.getElementById('isbnForm').style.display = "inline-block";
+}
+</script>
